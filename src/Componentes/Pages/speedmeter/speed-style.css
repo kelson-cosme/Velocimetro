@@ -1,0 +1,17 @@
+#speed{
+    color: brown;
+    font-size: 150px;
+}
+button{
+    border: none;
+    color: #ffff;
+    padding: 5px 15px;
+    border-radius: 4px;
+    margin: 5px;
+}
+#start{
+    background-color: rgba(0, 153, 255, 0.829);
+}
+#stop{
+    background-color: red;
+}
