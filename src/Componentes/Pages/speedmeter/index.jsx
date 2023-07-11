@@ -1,11 +1,12 @@
 import {Link} from "react-router-dom"
 
+const startBtn = document.getElementById("start")
+const stopBtn = document.getElementById("stop")
+
 export default function Velocimetro(){
 
     function botoes(){
-        const startBtn = document.getElementById("start")
-        const stopBtn = document.getElementById("stop")
-
+      
         startBtn.classList.toggle("d-none")
         stopBtn.classList.toggle("d-none")
 
