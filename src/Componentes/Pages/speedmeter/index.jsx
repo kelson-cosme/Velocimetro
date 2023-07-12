@@ -18,7 +18,7 @@ export default function Velocimetro(){
 //quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
         function handleSuccess(position){
 
-            speedElement.innerText = position.coords.speed ? null: 0
+            speedElement.innerText = position.coords.speed ? position.coords.speed * 3.6: 0
 
         }
 
