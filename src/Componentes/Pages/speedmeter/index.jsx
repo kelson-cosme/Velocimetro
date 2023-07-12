@@ -1,15 +1,42 @@
 import {Link} from "react-router-dom"
 
-const startBtn = document.getElementById("start")
-const stopBtn = document.getElementById("stop")
 
 export default function Velocimetro(){
 
-    function botoes(){
-      
-        startBtn.classList.toggle("d-none")
-        stopBtn.classList.toggle("d-none")
 
+    function start(){
+        
+        const speedElement = document.getElementById("speed") //Elemento onde irá aparecer a velocidade
+
+
+        let startBtn = document.getElementById("start")
+        let stopBtn = document.getElementById("stop")
+
+        startBtn.classList.add("d-none")
+        stopBtn.classList.remove("d-none")
+
+//quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
+        function handleSuccess(position){
+
+            speedElement.innerText = position.coords.speed ? null: 0
+
+        }
+
+        function handleError(error){
+            console.log(error.msg)
+        }
+
+        const opions = { enableHighAccuracy: true} //Ativar o alta precisão
+
+        navigator.geolocation.watchPosition(handleSuccess, handleError, opions) 
+    }
+
+    function stop(){
+        let startBtn = document.getElementById("start")
+        let stopBtn = document.getElementById("stop")
+
+        startBtn.classList.remove("d-none")
+        stopBtn.classList.add("d-none")
     }
     
     return(
@@ -24,8 +51,8 @@ export default function Velocimetro(){
                 <span style={{fontSize: "36px"}}> Km/h</span>
             </div>
             
-            <button id="start" onClick={() => botoes()} className="btn btn-primary mb-3" ><span className="display-4">Start</span></button>
-            <button id="stop" onClick={() => botoes()} className="btn btn-danger d-none mb-3"><span className="display-4">Stop</span></button>
+            <button id="start" onClick={start} className="btn btn-primary mb-3" ><span className="display-4">Start</span></button>
+            <button id="stop" onClick={() => stop()} className="btn btn-danger d-none mb-3"><span className="display-4">Stop</span></button>
         </div>
 
     )
