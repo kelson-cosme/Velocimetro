@@ -1,8 +1,8 @@
 import {Link} from "react-router-dom"
 
-
 export default function Velocimetro(){
 
+    let whatId = null
 
     function start(){
         
@@ -15,23 +15,33 @@ export default function Velocimetro(){
         startBtn.classList.add("d-none")
         stopBtn.classList.remove("d-none")
 
+        if (whatId) //se o whatId for diferente de Null, ele irá retornar, para não zerar o velocimetro toda vez
+        return
+
         function handleSuccess(position){
-
-//quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
+            //quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
             speedElement.innerText = position.coords.speed ? (position.coords.speed * 3.6).toFixed(1): 0
-
+            console.log(whatId)
         }
 
         function handleError(error){
             console.log(error.msg)
+
         }
 
         const opions = { enableHighAccuracy: true} //Ativar o alta precisão
 
-        navigator.geolocation.watchPosition(handleSuccess, handleError, opions) 
+        whatId = navigator.geolocation.watchPosition(handleSuccess, handleError, opions) 
     }
 
     function stop(){
+
+        if(!whatId) //se for nulo não precisa limpar
+            return
+
+        navigator.geolocation.clearWatch(whatId)
+        whatId = null
+
         let startBtn = document.getElementById("start")
         let stopBtn = document.getElementById("stop")
 
