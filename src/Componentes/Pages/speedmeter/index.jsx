@@ -15,10 +15,10 @@ export default function Velocimetro(){
         startBtn.classList.add("d-none")
         stopBtn.classList.remove("d-none")
 
-//quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
         function handleSuccess(position){
 
-            speedElement.innerText = position.coords.speed ? position.coords.speed * 3.6: 0
+//quando a velocidade for "null", o speed tera valor de "0", multiplicar por 3,6 para poder converter para Km/h
+            speedElement.innerText = position.coords.speed ? (position.coords.speed * 3.6).toFixed(1): 0
 
         }
 
